@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+
 @Component
 public class CozinhaRepositoryImpl implements CozinhaRepository {
 
@@ -37,8 +38,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
     @Override
     public void remover(Long id) {
         Cozinha cozinha = buscar(id);
-
-        if(cozinha == null)
+        if (cozinha == null)
             throw new EmptyResultDataAccessException(1);
 
         manager.remove(cozinha);
