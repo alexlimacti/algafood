@@ -27,7 +27,6 @@ public class CozinhaController {
 
     @GetMapping
     public List<Cozinha> listar() {
-        System.out.println("LISTAR 1");
         return cozinhaRepository.listar();
     }
 
