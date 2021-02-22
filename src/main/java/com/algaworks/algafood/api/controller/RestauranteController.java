@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/restaurantes")
@@ -29,17 +30,17 @@ public class RestauranteController {
 
     @GetMapping
     public List<Restaurante> listar() {
-        return restauranteRepository.listar();
+        return restauranteRepository.findAll();
     }
 
     @GetMapping("/{restauranteId}")
     public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId) {
-        Restaurante restaurante = restauranteRepository.buscar(restauranteId);
+        Optional<Restaurante> restaurante = restauranteRepository.findById(restauranteId);
 
-        if (restaurante == null)
+        if (restaurante.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(restaurante);
+        return ResponseEntity.ok(restaurante.get());
     }
 
     @PostMapping
@@ -58,7 +59,7 @@ public class RestauranteController {
     @PutMapping(value = "/{restauranteId}")
     public ResponseEntity<?> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
         try {
-            Restaurante restauranteAtual = restauranteRepository.buscar(restauranteId);
+            Restaurante restauranteAtual = restauranteRepository.findById(restauranteId).orElse(null);
 
             if (restauranteAtual == null)
                 return ResponseEntity.notFound().build();
@@ -77,12 +78,12 @@ public class RestauranteController {
     @PatchMapping(value = "/{restauranteId}")
     public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId,
                                               @RequestBody Map<String, Object> campos) {
-        Restaurante restaurante = restauranteRepository.buscar(restauranteId);
-        if(restaurante == null)
+        Optional<Restaurante> restaurante = restauranteRepository.findById(restauranteId);
+        if(restaurante.isEmpty())
             return ResponseEntity.notFound().build();
 
-        merge(campos, restaurante);
-        return atualizar(restauranteId, restaurante);
+        merge(campos, restaurante.get());
+        return atualizar(restauranteId, restaurante.get());
     }
 
     private void merge(Map<String, Object> campos, Restaurante restaurante) {
