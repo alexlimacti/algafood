@@ -3,6 +3,7 @@ package com.algaworks.algafood.domain.repository;
 import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.infrastructure.repository.RestauranteRepositoryQueries;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +29,8 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
     int countByCozinhaId(Long cozinha);
 
     List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
+
+    @Query("from Restaurante r join fetch r.cozinha join fetch r.formasPagamento")
+    List<Restaurante> findAll();
 
 }
