@@ -30,7 +30,7 @@ public interface RestauranteRepository extends CustomJpaRepository<Restaurante, 
 
     List<Restaurante> find(String nome, BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal);
 
-    @Query("from Restaurante r join fetch r.cozinha join fetch r.formasPagamento")
+    @Query("from Restaurante r join fetch r.cozinha")
     List<Restaurante> findAll();
 
 }

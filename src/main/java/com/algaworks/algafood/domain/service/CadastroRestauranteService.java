@@ -17,6 +17,7 @@ public class CadastroRestauranteService {
 
     @Autowired
     private CadastroCozinhaService cadastroCozinhaService;
+
     public static final String MSG_RESTAURANTE_NAO_ENCONTRADO = "Não existe um cadastro de restaurante com código %d";
     public static final String MSG_CRESTAURANTE_EM_USO = "Restaurante de código %d não pode ser removido, pois está em uso";
 
