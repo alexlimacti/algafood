@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CadastroRestauranteService {
@@ -21,6 +22,7 @@ public class CadastroRestauranteService {
     public static final String MSG_RESTAURANTE_NAO_ENCONTRADO = "Não existe um cadastro de restaurante com código %d";
     public static final String MSG_CRESTAURANTE_EM_USO = "Restaurante de código %d não pode ser removido, pois está em uso";
 
+    @Transactional
     public Restaurante salvar(Restaurante restaurante) {
         Long cozinhaId = restaurante.getCozinha().getId();
         Cozinha cozinha = cadastroCozinhaService.buscarOuFalhar(cozinhaId);
@@ -32,6 +34,7 @@ public class CadastroRestauranteService {
         return restauranteRepository.findById(id).orElseThrow(() -> new RestauranteNaoEncontradoException(id));
     }
 
+    @Transactional
     public void remover(Long id) {
         try{
             restauranteRepository.deleteById(id);
