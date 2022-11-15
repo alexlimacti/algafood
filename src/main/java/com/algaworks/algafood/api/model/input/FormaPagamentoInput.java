@@ -7,9 +7,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CozinhaInput {
+public class FormaPagamentoInput {
 
 	@NotBlank
-	private String nome;
+	private String descricao;
 	
 }

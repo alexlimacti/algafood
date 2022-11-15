@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class EstadoModel {
 
-    private Long id;
-    private String nome;
-
+	private Long id;
+	private String nome;
+	
 }

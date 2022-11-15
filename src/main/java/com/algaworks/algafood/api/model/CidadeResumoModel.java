@@ -5,9 +5,10 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class CozinhaModel {
+public class CidadeResumoModel {
 
 	private Long id;
 	private String nome;
+	private String estado;
 	
 }
