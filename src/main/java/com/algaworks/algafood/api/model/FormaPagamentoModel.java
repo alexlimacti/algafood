@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 public class FormaPagamentoModel {
 
-    private Long id;
-    private String descricao;
-
+	private Long id;
+	private String descricao;
+	
 }
